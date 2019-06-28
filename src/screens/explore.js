@@ -1,13 +1,13 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
+import { createMaterialTopTabNavigator, createAppContainer } from 'react-navigation'
+//import sub screens for explore tab
+import Food from './food'
+import Hotels from './hotels'
+import Transport from './transport'
 
 
 class Explore extends React.Component {
-  handleSignOut = () => {
-    //sign user out when this function is called
-    auth.signOut().then(() => this.props.navigation.navigate('Loading'))
-  }
-
   render(){
     return (
       <View style={styles.container}>
@@ -16,8 +16,8 @@ class Explore extends React.Component {
     )
   }
 }
-export default Explore
 
+const ExploreContainer = createAppContainer(ExploreNav)
 
 const styles = StyleSheet.create({
   container: {
