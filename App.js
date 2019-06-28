@@ -1,10 +1,14 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import { createBottomTabNavigator, createAppContainer } from 'react-navigation'
+import { StyleSheet, Text, View, Platform, StatusBar } from 'react-native'
+import { createBottomTabNavigator, createAppContainer, createMaterialTopTabNavigator } from 'react-navigation'
 //import screens
 import Explore from './src/screens/explore'
 import CameraApp from './src/screens/camera'
 import Profile from './src/screens/profile'
+
+import Food from './src/screens/food'
+import Hotels from './src/screens/hotels'
+import Transport from './src/screens/transport'
 
 
 class App {
@@ -17,10 +21,38 @@ class App {
   }
 }
 
+//top bar nav for explore screen
+const ExploreNav = createMaterialTopTabNavigator({
+  Food:{
+    screen: Food,
+    navigationOptions:{
+      tabBarLablel: 'FOOD'
+    }
+  },
+  Hotels:{
+    screen: Hotels,
+    navigationOptions:{
+      tabBarLablel: 'HOTELS'
+    }
+  },
+  Transport:{
+    screen: Transport,
+    navigationOptions:{
+      tabBarLablel: 'TRANSPORT'
+    }
+  }
+},{
+    tabBarOptions:{
+    style:{
+      paddingTop: Platform.OS === 'ios' ? 0 : StatusBar.currentHeight
+    }
+  } 
+})
+
 //main nav with bottom tabs
 const MainNav = createBottomTabNavigator({
   Explore:{
-    screen: Explore,
+    screen: ExploreNav,
     navigationOptions:{
       tabBarLablel: 'EXPLORE'
     }
