@@ -1,13 +1,47 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react'
+import { StyleSheet, Text, View } from 'react-native'
+import { createBottomTabNavigator, createAppContainer } from 'react-navigation'
+//import screens
+import Explore from './src/screens/explore'
+import Camera from './src/screens/camera'
+import Profile from './src/screens/profile'
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
-  );
+
+class App {
+  render(){
+    return(
+      <View style={styles.container}>
+        <Text>Open up App.js to start working on your app!</Text>
+      </View>
+    )
+  }
 }
+
+//main nav with bottom tabs
+const MainNav = createBottomTabNavigator({
+  Explore:{
+    screen: Explore,
+    navigationOptions:{
+      tabBarLablel: 'EXPLORE'
+    }
+  },
+  Camera:{
+    screen: Camera,
+    navigationOptions:{
+      tabBarLablel: 'CAMERA'
+    }
+  },
+  Profile:{
+    screen: Profile,
+    navigationOptions:{
+      tabBarLablel: 'PROFILE'
+    }
+  }
+})
+
+const Container = createAppContainer(MainNav)
+
+export default Container
 
 const styles = StyleSheet.create({
   container: {
@@ -16,4 +50,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-});
+})
