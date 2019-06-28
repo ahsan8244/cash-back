@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native'
 import { createBottomTabNavigator, createAppContainer } from 'react-navigation'
 //import screens
 import Explore from './src/screens/explore'
-import Camera from './src/screens/camera'
+import CameraApp from './src/screens/camera'
 import Profile from './src/screens/profile'
 
 
@@ -26,7 +26,7 @@ const MainNav = createBottomTabNavigator({
     }
   },
   Camera:{
-    screen: Camera,
+    screen: CameraApp,
     navigationOptions:{
       tabBarLablel: 'CAMERA'
     }
