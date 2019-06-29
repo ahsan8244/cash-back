@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, Alert } from 'react-native'
+import{ withNavigationFocus } from 'react-navigation'
 import * as Permissions from 'expo-permissions'
 import { Camera } from 'expo-camera'
 import { BarCodeScanner } from 'expo-barcode-scanner'
@@ -42,6 +43,7 @@ class CameraApp extends React.Component {
   //     </View>
   // );
   render(){
+    const { isFocused } = this.props
     const { hasCameraPermission } = this.state;
     if (hasCameraPermission === null) {
       return <View />;
@@ -50,7 +52,7 @@ class CameraApp extends React.Component {
     } else {
       return (
           <View style={{flex: 1}}>
-            <Camera style={{flex: 1}} type={this.state.type}
+            {isFocused && <Camera style={{flex: 1}} type={this.state.type}
                     barCodeScannerSettings={{
                         barCodeTypes: [
                             BarCodeScanner.Constants.BarCodeType.qr,
@@ -91,14 +93,14 @@ class CameraApp extends React.Component {
                       <Text style={{color: "white", marginBottom:10}}> QRCode </Text>
                   </TouchableOpacity>
               </View>
-            </Camera>
+            </Camera>}
               {/*{this.renderBarcode()}*/}
           </View>
       )
     }
   }
 }
-export default CameraApp
+export default withNavigationFocus(CameraApp)
 
 
 const styles = StyleSheet.create({
