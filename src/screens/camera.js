@@ -3,7 +3,9 @@ import {
     View,
     Text,
     StyleSheet,
-    TouchableHighlight
+    TouchableHighlight,
+    Modal, 
+    Image
 } from "react-native";
 
 import { Camera } from 'expo-camera'
@@ -14,13 +16,17 @@ import { Container, Content, Header, Item, Icon, Input, Button } from 'native-ba
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import RNTesseractOcr from 'react-native-tesseract-ocr';
+import { db, storage } from '../../dbconfig'
+const uuid = require('uuidv4')
 
 class CameraComponent extends Component {
 
     state = {
         hasCameraPermission: null,
         type: Camera.Constants.Type.back,
-        photo: {}
+        photo: '',
+        modalVisible: false,
+        download: ''
     }
 
     async componentWillMount() {
@@ -32,23 +38,36 @@ class CameraComponent extends Component {
       if (this.camera) {
         let photo = await this.camera.takePictureAsync();
         console.log(photo)
-        this.setState({ photo: photo })
+        this.setState({ photo: photo.uri })
 
-        const tessOptions = {
-          whitelist: null, 
-          blacklist: '\'!"#$%&/()={}[]+*-_;<>'
-        };
-
-        RNTesseractOcr.recognize(photo.uri, LANG_ENGLISH, tessOptions)
-        .then((result) => {
-          console.log("OCR Result: ", result);
-        })
-        .catch((err) => {
-          console.log("OCR Error: ", err);
-        })
-        .done();
+        this.setState({ modalVisible: true })
       }
     };
+
+    pushData = async () => {
+      this.pushReceipt().then(() => {
+
+      })
+      .catch(error => {
+
+      })
+    }
+
+    pushReceipt = async () => {
+        let path = '/images/' + uuid() + '.jpg'
+        let loc = storage.ref(path)
+        const response = await fetch(this.state.photo)
+        const blob = await response.blob()
+        this.setState({ download: path, modalVisible: false })
+        db.ref().child('receipts').push({
+          url: this.state.photo
+        })
+        return loc.put(blob)
+    }
+
+    setModalVisible(visible) {
+      this.setState({modalVisible: visible});
+    }
 
     render() {
         const { isFocused } = this.props
@@ -63,6 +82,30 @@ class CameraComponent extends Component {
         else {
             return (
                 <View style={{ flex: 1 }}>
+                  <View>
+                  <Modal
+                    animationType="slide"
+                    transparent={false}
+                    visible={this.state.modalVisible}
+                    onRequestClose={() => {
+
+                    }}>
+                    <View>
+                      <View>         
+                          <Image source={{ uri: this.state.photo }} style={{ height: 550, resizeMode: 'cover' }} />  
+                          <View style={{ alignItems: 'center' }}>
+                            <TouchableHighlight
+                              underlayColor='transparent'
+                              onPress={() => {
+                                this.pushData()
+                              }}>
+                              <Icon name='checkmark' style={{ marginTop: 12, color: 'green' }}/>
+                            </TouchableHighlight>
+                          </View>
+                        </View>
+                      </View>
+                    </Modal>
+                    </View>
                     {isFocused && <Camera 
                       ref={ref => {
                         this.camera = ref;
@@ -123,11 +166,3 @@ class CameraComponent extends Component {
     }
 }
 export default withNavigationFocus(CameraComponent);
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
-    }
-});
