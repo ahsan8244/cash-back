@@ -1,27 +1,23 @@
 import React from 'react'
 import { StyleSheet, Text, View, Image, Platform, StatusBar, FlatList } from 'react-native'
 import MerchantCard from '../components/merchant-card'
+import { db } from '../../dbconfig'
 
 
 class Profile extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-          data: [
-              {
-                  imageUrl: require('../../assets/splash.png'),
-                  title: 'McDonalds'
-              },
-              {
-                  imageUrl: require('../../assets/splash.png'),
-                  title: 'Cafe de Coral'
-              },
-              {
-                  imageUrl: require('../../assets/splash.png'),
-                  title: 'Kai Kee'
-              },
-          ]
-      }
+      receipts: {},
+      imageUrl: require('../../assets/splash.png')
+    }
+  }
+
+  componentDidMount(){
+    db.ref('/myreceipt').on('value', snapshot => {
+      let data = snapshot.val()
+      this.setState({ receipts: data })
+    })
   }
 
   render(){
@@ -35,11 +31,11 @@ class Profile extends React.Component {
           <Text style={{ fontSize: 24, marginTop: 14 }}>Ahsan Syed</Text>
         </View>
         <FlatList
-            data={this.state.data}
+            data={[this.state.receipts]}
             renderItem={
                 ({item}) => <MerchantCard 
-                imageUri={item.imageUrl}
-                title={item.title}/>
+                imageUri={this.state.imageUrl}
+                title={item.merchant}/>
             }
         />
       </View>
