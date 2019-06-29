@@ -1,0 +1,36 @@
+.Expand{
+    background-color : #8BDCE8;
+    height : 15px;
+    width : 30%;
+    border-radius :20px;
+    border : none;
+    align-self : center;
+    justify-self : right;
+    margin-right : 10px;
+    box-shadow: none;
+}
+
+.Expand:hover{
+    cursor: pointer;
+    background-color : #8BDCE8;
+}
+
+.Close{
+    background-color : #8BDCE8;
+    height : 25px;
+    width : fit-content ;
+    border-radius :20px;
+    border : none;
+    align-self : center;
+    justify-self : right;
+    margin-right: 20px;
+    box-shadow: none;
+    padding-left: 25%;
+    float:right;
+}
+
+.Close:hover{
+    cursor: pointer;
+    background-color : #8BDCE8;
+
+}

@@ -1,0 +1,54 @@
+.a,.b,.c {
+    width : 90%;
+    height : 90%;
+    background-color : #F9978B;
+    align-self : center;
+    justify-self : center;
+    border-radius : 10px;
+    align-items: center;
+    box-shadow: 1px;
+}
+
+.a img{
+    width : 90%;
+    height : 90%;
+}
+
+.a{
+    grid-row: 1/2;
+    background-image: linear-gradient(#00164d,#001445);
+}
+.b{
+    grid-row: 2/3;
+    background-image: url('./Images2/meta-chart.png');
+    background-size: cover;
+}
+.c{
+    grid-row: 3/4;
+    background-image: url('./Images2/bar-chart.png');
+    background-size: cover;
+}
+
+.a:hover,.b:hover,.c:hover{
+    transform: scale(1.1);
+    transition: 1s;
+    cursor: pointer;
+}
+.item{
+    background-color: #F9978B;
+    height : 80%;
+    width : 100%;
+    border-radius: 22%;
+    display : grid;
+    grid-template-rows: 80% 20%;
+
+}
+.item h1{
+    align-self: center;
+    justify-self : center;
+}
+
+.item p{
+    font-size: 12px;
+    align-self: center;
+}
