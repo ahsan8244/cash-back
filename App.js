@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View, Platform, StatusBar } from 'react-native'
 import { createBottomTabNavigator, createAppContainer, createMaterialTopTabNavigator } from 'react-navigation'
+import { Icon } from 'native-base'
 //import screens
 //import Explore from './src/screens/explore'
 import CameraApp from './src/screens/camera'
@@ -9,6 +10,7 @@ import Profile from './src/screens/profile'
 import Food from './src/screens/food'
 import Hotels from './src/screens/hotels'
 import Transport from './src/screens/transport'
+import Recents from './src/screens/recents'
 
 
 class App {
@@ -51,22 +53,41 @@ const ExploreNav = createMaterialTopTabNavigator({
 
 //main nav with bottom tabs
 const MainNav = createBottomTabNavigator({
-  Explore:{
-    screen: ExploreNav,
+  Recents:{
+    screen: Recents,
     navigationOptions:{
-      tabBarLablel: 'EXPLORE'
+      //tabBarLabel: 'Recents',
+      tabBarIcon: 
+        <Icon name = 'time' size={24} />
     }
   },
-  Camera:{
+  Scan:{
     screen: CameraApp,
     navigationOptions:{
-      tabBarLablel: 'CAMERA'
+      //tabBarLabel: 'Scan',
+      tabBarIcon: 
+        <Icon name = 'expand' size={24} />
     }
   },
-  Profile:{
+  Trips:{
     screen: Profile,
     navigationOptions:{
-      tabBarLablel: 'PROFILE'
+      //tabBarLabel: 'Trips',
+      tabBarIcon: 
+        <Icon name = 'airplane' size={24} />
+    }
+  }
+},{
+  tabBarOptions:{
+    showIcon: true,
+    showLabel: true,
+    activeTintColor:'green',
+    inactiveTintColor:'grey',
+    style:{
+      borderTopWidth: 0,
+      shadowOffset: { width: 5, height: 3 },
+      shadowColor: 'black',
+      elevation: 5
     }
   }
 })

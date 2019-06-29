@@ -1,15 +1,15 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image, Platform, StatusBar, FlatList } from 'react-native'
-import MerchantCard from '../components/merchant-card'
+import { StyleSheet, Text, View, Image, Platform, StatusBar, FlatList, Modal, TouchableHighlight, Alert } from 'react-native'
+import ReceiptCard from '../components/receipt-card'
 import { db } from '../../dbconfig'
-
 
 class Profile extends React.Component {
   constructor(props){
     super(props)
     this.state = {
       receipts: {},
-      imageUrl: require('../../assets/splash.png')
+      imageUrl: require('../../assets/splash.png'),
+      modalVisible: false
     }
   }
 
@@ -20,9 +20,56 @@ class Profile extends React.Component {
     })
   }
 
+  setModalVisible(visible) {
+    this.setState({ modalVisible: visible })
+  }
+
+  extractItems = () => {
+    let items = []
+
+    for (let key in this.state.receipts.items){
+      let val = this.state.receipts.items[key]
+      let item = {
+        name: key,
+        price: val
+      }
+      items.push(item)
+    }
+    return items
+  }
+
   render(){
     return (
       <View style={{ flex: 1, paddingTop: Platform.OS === 'ios' ? 0 : StatusBar.currentHeight }}>
+    
+        <Modal
+          animationType="slide"
+          transparent={false}
+          visible={this.state.modalVisible}
+          onRequestClose={() => {
+            Alert.alert('Modal has been closed.');
+          }}>
+          <View style={{ marginTop: 22, flex: 1 }}>
+            <View style={{ alignItems: 'center' }}>
+              <Text style={{ fontSize: 24 }}>{`Merchant: ${this.state.receipts.merchant}`}</Text>
+
+              <TouchableHighlight
+                onPress={() => {
+                  this.setModalVisible(!this.state.modalVisible);
+                }}>
+                <Text>Hide Modal</Text>
+              </TouchableHighlight>
+            </View>
+            <FlatList
+                data = {this.extractItems()}
+                renderItem={
+                    ({item}) => 
+                    <Text>{`${item.name}: ${item.price}`}</Text>
+                }
+            />
+          </View>
+        </Modal>
+
         <View style={{ alignItems: 'center', marginBottom: 12 }}>
           <Image
             source={require('../../assets/pic.jpg')}
@@ -33,9 +80,14 @@ class Profile extends React.Component {
         <FlatList
             data={[this.state.receipts]}
             renderItem={
-                ({item}) => <MerchantCard 
+                ({item}) => <ReceiptCard 
                 imageUri={this.state.imageUrl}
-                title={item.merchant}/>
+                title={item.merchant}
+                date='29/06/2019'
+                handleClick={() => {
+                  this.setModalVisible(true)
+                }}
+                />
             }
         />
       </View>
