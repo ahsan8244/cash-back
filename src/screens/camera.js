@@ -103,25 +103,18 @@ class CameraComponent extends Component {
                             </View>
                         </Header>
 
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 10, marginBottom: 15, alignItems: 'flex-end' }}>
-                            <MaterialCommunityIcons name="message-reply"
-                                style={{ color: 'white', fontSize: 36 }}
-                            ></MaterialCommunityIcons>
-                            <TouchableHighlight 
-                              onPress={this.snap}
-                              underlayColor='white'
-                              >
-                              <View style={{ alignItems: 'center' }}>
-                                  <MaterialCommunityIcons name="circle-outline"
-                                      style={{ color: 'white', fontSize: 100 }}
-                                  ></MaterialCommunityIcons>
-                                  <Icon name="ios-images" style={{ color: 'white', fontSize: 36 }} />
-                              </View>
-                            </TouchableHighlight>
-                            <MaterialCommunityIcons name="google-circles-communities"
-                                style={{ color: 'white', fontSize: 36 }}
-                            ></MaterialCommunityIcons>
-
+                        <View style={{ flexDirection: 'row', justifyContent: 'center', paddingHorizontal: 10, marginBottom: 15, alignItems: 'flex-end' }}>
+                            <View style={{ alignItems: 'center' }}>
+                              <TouchableHighlight 
+                                onPress={this.snap}
+                                underlayColor='transparent'
+                                >
+                                <MaterialCommunityIcons name="circle-outline"
+                                    style={{ color: 'white', fontSize: 100 }}
+                                ></MaterialCommunityIcons>
+                              </TouchableHighlight>
+                                <Icon name="ios-images" style={{ color: 'white', fontSize: 36 }} />
+                            </View>
                         </View>
                     </Camera>}
                 </View>
