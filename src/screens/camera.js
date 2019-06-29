@@ -3,6 +3,8 @@ import { StyleSheet, Text, View, TouchableOpacity, Alert } from 'react-native'
 import * as Permissions from 'expo-permissions'
 import { Camera } from 'expo-camera'
 import { BarCodeScanner } from 'expo-barcode-scanner'
+import { db } from '../../dbconfig'
+import { Object } from 'core-js';
 
 
 class CameraApp extends React.Component {
@@ -10,6 +12,7 @@ class CameraApp extends React.Component {
     hasCameraPermission: null,
     type: Camera.Constants.Type.back,
     barCodeScanning: false,
+    receiptData: {}
   };
 
   async componentDidMount() {
@@ -20,11 +23,17 @@ class CameraApp extends React.Component {
   toggleBarcodeScanning = () => this.setState({ barcodeScanning: !this.state.barcodeScanning });
 
   onBarCodeScanned = code => {
-        this.setState(
-            { barcodeScanning: !this.state.barcodeScanning },
-            Alert.alert(`Barcode found: ${code.data}`)
-        );
-    };
+    if (code.data.includes('https://cash-back-9c091.firebaseio.com')) {
+      
+      db.ref('/receipt').on('value', snapshot => {
+        let data = snapshot.val()
+        let items = Object.values(data)
+        this.setState({ barcodeScanning: !this.state.barcodeScanning, receiptData: data })
+        db.ref('/myreceipt').set(data)
+        this.props.navigation.navigate('Profile')
+      })
+    }
+  };
   // renderBarcode = () => (
   //     <View style={style.options}>
   //         <TouchableOpacity onPress={this.toggleBarcodeScanning}>

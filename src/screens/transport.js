@@ -1,6 +1,6 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-
+import { StyleSheet, Text, View, FlatList } from 'react-native'
+import MerchantCard from '../components/merchant-card'
 
 class Transport extends React.Component {
     constructor(props){

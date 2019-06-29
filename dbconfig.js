@@ -11,6 +11,6 @@ let firebaseConfig = {
 };
 
 // Initialize Firebase
-let app = firebase.initializeApp(firebaseConfig);
+let app = Firebase.initializeApp(firebaseConfig);
 
 export const db = app.database();

@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, View, Platform, StatusBar } from 'react-native'
 import { createBottomTabNavigator, createAppContainer, createMaterialTopTabNavigator } from 'react-navigation'
 //import screens
-import Explore from './src/screens/explore'
+//import Explore from './src/screens/explore'
 import CameraApp from './src/screens/camera'
 import Profile from './src/screens/profile'
 
