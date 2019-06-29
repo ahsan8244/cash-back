@@ -9,7 +9,7 @@ class MerchantCard extends React.Component {
                     <Image source={this.props.imageUri}
                     style={{ resizeMode: 'cover', flex: 1, width: null, height: null }}/>
                 </View>
-                <View style={{ flex: 1, paddingTop: 12, paddingHorizontal: 12}}>
+                <View style={{ flex: 1, paddingTop: 12, paddingHorizontal: 12 }}>
                     <Text>{this.props.title}</Text>
                 </View>
             </View>
