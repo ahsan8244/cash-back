@@ -1,5 +1,12 @@
-# cash-back
-A solution to employee reimbursements
+# CashBack
+A solution to reduce the excessive amount of paperwork and manual labor involved in employee reimbursements
+*our project for FinHACK2019*
+
+Team:
+Syed Muhammad Ahsan
+Welvin Bun
+Manya Agarwal
+Diabul Haque
 
 # Install dependencies
 ```
