@@ -5,6 +5,7 @@ A solution to employee reimbursements
 ```npm install -g yarn```
 
 # for mobile app
-```cd mobile 
-   yarn install
+```
+cd mobile 
+yarn install
 ```
