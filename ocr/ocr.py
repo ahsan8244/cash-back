@@ -1,8 +1,11 @@
 from PIL import Image
 import pytesseract
+import os
 
 totalPrefix = ['grand total','amount','subtotal','grand amount']
 
+#a function that filters important information form a list of strings
+#and return a dictionary object
 def textToJSON(text):
     i=0
     while(i<len(text)):
@@ -21,13 +24,27 @@ def textToJSON(text):
                 return data
     return data
 
-#Store the data of receipt.jpg to a variable called image
-image = Image.open("receipt.png")
+#Opening a stream for file output
+oStream = open("output.txt","a+")
 
-#Using pytesseract library, convert image to a string (the core ocr function)
-text = pytesseract.image_to_string(image, lang = 'eng').split('\n')
+#Test for different receipt sample
+for filename in os.listdir('images'):
+    
+    #Store the data of receipt.jpg to a variable called image
+    image = Image.open("images/"+filename)
 
-data = textToJSON(text)
-for key in data :
-    print(key,':',data[key])
+    #Using pytesseract library, convert image to a string (the core ocr function)
+    text = pytesseract.image_to_string(image, lang = 'eng').split('\n')
 
+    data = textToJSON(text)
+
+    output = ""
+
+    for key in data :
+        output += (key + ':' + data[key] + '\n')
+
+    #Appending data to output file
+    oStream.write(output+'\n')
+
+
+oStream.close()
