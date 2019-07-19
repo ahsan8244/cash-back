@@ -1,0 +1,14 @@
+{
+  "name": "cash-back-server",
+  "version": "1.0.0",
+  "description": "server for cash-back",
+  "main": "src/index.js",
+  "repository": "https://github.com/ahsan8244/cash-back",
+  "author": "Brownish",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "global": "^4.4.0",
+    "nodemon": "^1.19.1"
+  }
+}
