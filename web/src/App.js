@@ -6,20 +6,18 @@ import Stats from "./Components/Stats";
 import receipt from './ocr/images/receipt.png';
 import { Tesseract } from 'tesseract.ts';
 
-Tesseract
-    .recognize(receipt)
-    .progress(console.log)
-    .then((res: any) => {
-        console.log(res["text"],res["confidence"]);
-    })
-    .catch(console.error);
-
 class App extends React.Component{
   state = {
     collapsed: false,
+    result: "Loading..."
   };
-
   render(){
+  Tesseract
+      .recognize(receipt)
+      .then((res: any) => {
+          this.setState({result : res["text"]});
+      })
+      .catch(console.error);
     return (
         <div>
             <TopBar/>
@@ -27,7 +25,7 @@ class App extends React.Component{
                 <Stats/>
                 <div style={{border : '0.2px solid black', marginTop : '40px'}}>
                 </div>
-                <TripList/>
+                <TripList message={this.state.result}/>
             </div>
         </div>
 
