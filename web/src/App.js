@@ -1,8 +1,5 @@
 import './App.css'
 import React from 'react';
-import ironMan from './Components/Images/ironMan.jpg';
-import thor from './Components/Images/thor.jpg';
-import cap from './Components/Images/cap.jpg';
 import TopBar from "./Components/TopBar";
 import TripList from "./Components/TripList";
 import Stats from "./Components/Stats";
@@ -10,8 +7,8 @@ import Stats from "./Components/Stats";
 class App extends React.Component{
   state = {
     collapsed: false,
+    result: "Loading..."
   };
-
   render(){
     return (
         <div>
