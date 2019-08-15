@@ -1,11 +1,18 @@
 import './App.css'
 import React from 'react';
-import ironMan from './Components/Images/ironMan.jpg';
-import thor from './Components/Images/thor.jpg';
-import cap from './Components/Images/cap.jpg';
 import TopBar from "./Components/TopBar";
 import TripList from "./Components/TripList";
 import Stats from "./Components/Stats";
+import receipt from './ocr/images/receipt.png';
+import { Tesseract } from 'tesseract.ts';
+
+Tesseract
+    .recognize(receipt)
+    .progress(console.log)
+    .then((res: any) => {
+        console.log(res["text"],res["confidence"]);
+    })
+    .catch(console.error);
 
 class App extends React.Component{
   state = {

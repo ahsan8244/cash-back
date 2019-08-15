@@ -1,0 +1,23 @@
+Activity:Ying Thai Kitchen
+Address:2220 Queen Anne AVE N
+Location:Seattle WA 98109
+Total Amount: $12.59
+
+Activity:AROMA CAFE
+Address:1211 Green Street
+Location:New York, NY
+Total Amount:. $90.52
+
+Activity:Hazit
+Address:ass Pe
+Location:TOIEDILA, OA
+
+Activity:McDonald’s Restaurant #4525
+Address:NORTH 3416 MARKET
+Location:SPOKANE ,WA 99207
+Total Amount: 3.69
+
+Activity:George’s Restaurant
+Address:300 72th Street
+Location:Miami Beach f1 33141
+
